@@ -1,10 +1,11 @@
-import express from "express";
-import User from "../models/userSchema.mjs";
+import express from 'express';
+import userCTRL from '../controllers/userControllers.mjs';
 
 const router = express.Router();
 
-router.route('/').get((req,res)=>{
-    res.send('User Routes')
-})
+// @route:   POST api/users
+// @desc:    Create/Registering User
+// @access:  Public
+router.route('/').post(userCTRL.createNewUser);
 
 export default router;
