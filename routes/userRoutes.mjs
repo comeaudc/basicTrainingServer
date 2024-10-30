@@ -1,5 +1,5 @@
 import express from 'express';
-import userCTRL from '../controllers/userControllers.mjs';
+import userCTRL from '../controllers/userController.mjs';
 import { check } from 'express-validator';
 
 const router = express.Router();

@@ -3,6 +3,7 @@ import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.mjs';
 import authRoutes from './routes/authRoutes.mjs';
+import exerciseRoutes from './routes/exerciseRoutes.mjs';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from './config/db.mjs';
@@ -23,6 +24,7 @@ app.use(bodyParser.json({ extended: true }));
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/exercise', exerciseRoutes);
 
 // Listener
 app.listen(PORT, () => {
