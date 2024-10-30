@@ -33,7 +33,7 @@ async function createNewUser(req, res) {
     newUser.password = await bcryptjs.hash(password, salt);
 
     await newUser.save();
-    console.log(newUser);
+
     const payload = {
       user: {
         id: newUser.id,
