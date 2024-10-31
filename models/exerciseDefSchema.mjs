@@ -12,11 +12,11 @@ const exerciseDefSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      reps: {
+      sets: {
         type: String,
         required: true,
       },
-      sets: {
+      reps: {
         type: String,
         required: true,
       },
@@ -24,10 +24,10 @@ const exerciseDefSchema = new mongoose.Schema({
   ],
   similarExercises: [
     {
-      refId: {type: Schema.Types.ObjectId, ref: 'ExDef'},
-      name: { type: String, required: true },
+      refId: { type: mongoose.Schema.Types.ObjectId, ref: "ExDef" },
+      name: { type: String },
     },
   ],
 });
 
-export default mongoose.Model("ExDef", exerciseDefSchema);
+export default mongoose.model("ExDef", exerciseDefSchema);
