@@ -1,16 +1,26 @@
 import ExDef from "../models/exerciseDefSchema.mjs";
+import seedData from "../utilities/seedData.mjs";
 
 //Add One Exercise
 async function addExercise(req, res) {
   try {
-    let newExercise = new ExDef(req.body);
-
-    await newExercise.save();
+    let newExercise = await ExDef.create(req.body);
 
     res.json({ newExercise });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Server Error" });
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+}
+
+async function seedExercises(req, res) {
+  try {
+    await ExDef.create(seedData);
+
+    res.send("Data Seeded");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Server Error", error: err.message });
   }
 }
 
@@ -22,8 +32,8 @@ async function getAllExercises(req, res) {
     res.json(allExercses);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Server Error" });
+    res.status(500).json({ message: "Server Error", error: err.message });
   }
 }
 
-export default { addExercise, getAllExercises };
+export default { addExercise, getAllExercises, seedExercises };

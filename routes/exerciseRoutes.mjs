@@ -8,4 +8,6 @@ router
   .post(exerciseCTRL.addExercise)
   .get(exerciseCTRL.getAllExercises);
 
+router.get("/seed", exerciseCTRL.seedExercises);
+
 export default router;
