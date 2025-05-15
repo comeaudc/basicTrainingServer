@@ -31,7 +31,6 @@ const userSchema = new mongoose.Schema({
   },
   currentWorkout: { type: mongoose.Schema.Types.ObjectId, ref: "Workout" },
   history: { type: mongoose.Schema.Types.ObjectId, ref: "History" },
-  //   currentWorkout: {},
 });
 
 userSchema.index({ email: 1 });
