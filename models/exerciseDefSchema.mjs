@@ -8,24 +8,20 @@ const exerciseDefSchema = new mongoose.Schema({
   },
   recs: [
     {
-      goal: {
-        type: String,
-        required: true,
-      },
+      goal: { type: String, required: true }, // e.g., 'strength', 'endurance'
       sets: {
-        type: String,
-        required: true,
+        min: { type: Number },
+        max: { type: Number },
       },
       reps: {
-        type: String,
-        required: true,
+        min: { type: Number },
+        max: { type: Number },
       },
     },
   ],
   similarExercises: [
     {
       refId: { type: mongoose.Schema.Types.ObjectId, ref: "ExDef" },
-      name: { type: String },
     },
   ],
 });
