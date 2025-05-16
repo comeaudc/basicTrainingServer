@@ -13,6 +13,7 @@ async function addExercise(req, res) {
   }
 }
 
+// Seed exercises
 async function seedExercises(req, res) {
   try {
     await ExDef.create(seedData);
