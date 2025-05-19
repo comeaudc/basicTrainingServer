@@ -19,7 +19,7 @@ async function loginUser(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
   }
 
   const { email, password } = req.body;
@@ -28,13 +28,13 @@ async function loginUser(req, res) {
     let user = await User.findOne({ email });
 
     if (!user) {
-      res.status(400).json({ msg: "Invalid Credentials" });
+      return res.status(400).json({ msg: "Invalid Credentials" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(400).json({ msg: "Invalid Credentials" });
+       return res.status(400).json({ msg: "Invalid Credentials" });
     }
 
     const payload = {
