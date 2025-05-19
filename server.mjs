@@ -1,6 +1,7 @@
 // Imports
 import express from "express";
 import dotenv from "dotenv";
+import morgan from "morgan";
 import globalErr from "./middleware/globalErr.mjs";
 import userRoutes from "./routes/userRoutes.mjs";
 import authRoutes from "./routes/authRoutes.mjs";
@@ -19,6 +20,7 @@ connectDB();
 
 // Middleware
 app.use(cors());
+app.use(morgan("tiny"));
 app.use(express.json());
 
 // Routes
