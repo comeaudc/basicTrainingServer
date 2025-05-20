@@ -9,7 +9,7 @@ async function findUserByToken(req, res) {
     const user = await User.findById(req.user.id).select("-password -email");
 
     if (user.currentWorkout) {
-      await user.populate("workout");
+      await user.populate("currentWorkout");
     }
 
     res.json(user);
