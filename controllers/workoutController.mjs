@@ -1,10 +1,17 @@
-import { get } from "mongoose";
 import Workout from "../models/workoutSchema.mjs";
+import User from "../models/userSchema.mjs";
 
 let startWorkout = async (req, res) => {
   try {
     const { exercises = [], duration, notes } = req.body;
     const userId = req.user.id;
+
+    const user = await User.findOne({ _id: userId });
+
+    if (!user)
+      return res
+        .status(401)
+        .json({ errors: [{ msg: "User Not Found, Check Auth Status" }] });
 
     const workout = new Workout({
       user: userId,
@@ -15,10 +22,14 @@ let startWorkout = async (req, res) => {
 
     await workout.save();
 
+    user.currentWorkout = workout._id;
+
+    user.save();
+
     res.status(201).json(workout);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: "Server Error", error: err.message });
+    res.status(500).json({ message: "Server Error", errors: err.message });
   }
 };
 
@@ -43,7 +54,7 @@ const addExercises = async (req, res) => {
     res.json(workout);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: "Server Error", error: err.message });
+    res.status(500).json({ message: "Server Error", errors: err.message });
   }
 };
 
@@ -53,12 +64,12 @@ const getWorkoutById = async (req, res) => {
       .populate("user", "name email")
       .populate("exercises.exerciseDefinition", "name category");
 
-    if (!workout) res.status(404).json({ error: "Workout Not Found" });
+    if (!workout) res.status(404).json({ errors: "Workout Not Found" });
 
     res.status(200).json(workout);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: "Server Error", error: err.message });
+    res.status(500).json({ message: "Server Error", errors: err.message });
   }
 };
 
