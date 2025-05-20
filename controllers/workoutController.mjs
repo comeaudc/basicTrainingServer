@@ -13,6 +13,11 @@ let startWorkout = async (req, res) => {
         .status(401)
         .json({ errors: [{ msg: "User Not Found, Check Auth Status" }] });
 
+    if (user.currentWorkout)
+      return res
+        .status(401)
+        .json({ errors: [{ msg: "Workout Already in Progress" }] });
+
     const workout = new Workout({
       user: userId,
       exercises,
