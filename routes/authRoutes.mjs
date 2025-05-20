@@ -4,6 +4,7 @@ import auth from "../middleware/auth.mjs";
 import { check } from "express-validator";
 const router = express.Router();
 
+// /api/auth
 router
   .route("/")
   .get(auth, authCTRL.findUserByToken)

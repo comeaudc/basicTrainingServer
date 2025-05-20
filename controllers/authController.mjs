@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 // async function findUserById
 async function findUserByToken(req, res) {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id).select("-password -email");
 
     res.json(user);
   } catch (err) {
