@@ -28,8 +28,8 @@ let startWorkout = async (req, res) => {
     await workout.save();
 
     user.currentWorkout = workout._id;
-
-    user.save();
+    
+    await user.save();
 
     res.status(201).json(workout);
   } catch (err) {
