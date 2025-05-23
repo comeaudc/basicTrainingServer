@@ -53,7 +53,7 @@ async function createNewUser(req, res) {
     };
 
     const token = await jwt.sign(payload, process.env.jwtSecret, {
-      expiresIn: 3600,
+      // expiresIn: 3600,
     });
 
     res.json({ token });

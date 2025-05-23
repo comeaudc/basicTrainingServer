@@ -1,5 +1,4 @@
 import express from "express";
-import Workout from "../models/workoutSchema.mjs";
 import workoutController from "../controllers/workoutController.mjs";
 import auth from "../middleware/auth.mjs";
 
@@ -13,5 +12,7 @@ router.post("/", auth, workoutController.startWorkout);
 router.post("/:id/add", auth, workoutController.addExercises);
 
 router.get("/:id", auth, workoutController.getWorkoutById);
+
+router.put('/:id/archive', auth, workoutController.stopWorkout)
 
 export default router;

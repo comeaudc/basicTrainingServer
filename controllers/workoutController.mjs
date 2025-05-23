@@ -1,4 +1,5 @@
 import Workout from "../models/workoutSchema.mjs";
+import History from "../models/historySchema.mjs";
 import User from "../models/userSchema.mjs";
 
 let startWorkout = async (req, res) => {
@@ -28,7 +29,7 @@ let startWorkout = async (req, res) => {
     await workout.save();
 
     user.currentWorkout = workout._id;
-    
+
     await user.save();
 
     res.status(201).json(workout);
@@ -78,4 +79,37 @@ const getWorkoutById = async (req, res) => {
   }
 };
 
-export default { startWorkout, addExercises, getWorkoutById };
+const stopWorkout = async (req, res) => {
+  try {
+    const { notes } = req.body;
+
+    let user = await User.findById(req.user.id).select(
+      "history currentWorkout"
+    );
+
+    if (!user)
+      return res.status(400).json({ errors: [{ msg: "User Not Found" }] });
+
+    const history = await History.findById(user.history);
+
+    let archiveWorkout = {
+      workout: user.currentWorkout,
+      notes,
+    };
+
+    history.workouts.push(archiveWorkout);
+
+    await history.save();
+
+    user.currentWorkout = null;
+
+    await user.save();
+
+    res.send(history);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Server Error", errors: err.message });
+  }
+};
+
+export default { startWorkout, addExercises, getWorkoutById, stopWorkout };
