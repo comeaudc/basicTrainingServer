@@ -21,8 +21,9 @@ let startWorkout = async (req, res) => {
 
     const workout = new Workout({
       user: userId,
-      exercises,
+      focus,
       duration,
+      exercises,
       notes,
     });
 

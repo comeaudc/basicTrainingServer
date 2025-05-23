@@ -5,7 +5,7 @@ import auth from "../middleware/auth.mjs";
 const router = express.Router();
 
 // @route: POST /api/workout
-// @desc: create new workout
+// @desc: build new workout
 // @access: Private
 router.post("/", auth, workoutController.startWorkout);
 
