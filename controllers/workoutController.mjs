@@ -4,7 +4,7 @@ import User from "../models/userSchema.mjs";
 
 let startWorkout = async (req, res) => {
   try {
-    const { exercises = [], duration, notes } = req.body;
+    const { exercises = [], duration, focus, notes } = req.body;
     const userId = req.user.id;
 
     const user = await User.findOne({ _id: userId });

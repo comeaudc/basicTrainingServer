@@ -9,10 +9,10 @@ const router = express.Router();
 // @access: Private
 router.post("/", auth, workoutController.startWorkout);
 
-router.post("/:id/add", auth, workoutController.addExercises);
+router.put("/:id/add", auth, workoutController.addExercises);
 
 router.get("/:id", auth, workoutController.getWorkoutById);
 
-router.put('/:id/archive', auth, workoutController.stopWorkout)
+router.post("/archive", auth, workoutController.stopWorkout);
 
 export default router;

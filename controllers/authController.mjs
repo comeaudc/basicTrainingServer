@@ -8,7 +8,6 @@ async function findUserByToken(req, res) {
   try {
     const user = await User.findById(req.user.id).populate("currentWorkout");
       
-    console.log(user);
     res.json(user);
   } catch (err) {
     console.error.err;

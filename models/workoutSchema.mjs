@@ -23,6 +23,21 @@ const exerciseSchema = new mongoose.Schema(
 const workoutSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    focus: {
+      type: String,
+      enum: [
+        "Push",
+        "Pull",
+        "Legs",
+        "Chest",
+        "Back",
+        "Shoulders",
+        "Core",
+        "Arms",
+        "Upper Body",
+        "Lower Body",
+      ],
+    },
     exercises: { type: [exerciseSchema], required: true },
     duration: { type: Number }, // Optional: total time in minutes
     notes: { type: String }, // Optional: general workout notes
